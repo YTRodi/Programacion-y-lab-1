@@ -1,0 +1,1 @@
+Creación de una lista dinámica:  Generación dinámica de memoria. Creación de tipos de datos particulares. Utilización de memoria dinámica para la creación de tipos de datos.Solución al problema del array estático mediante memoria dinámica. Solución al problema con lista de punteros.

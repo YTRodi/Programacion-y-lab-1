@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1567999438 source:c:\users\yago\desktop\workspace yago\programacion 1\c_programacion1-master\array paralelo 09-09-19\practica\utn.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1568316908 source:c:\users\yago\desktop\workspace yago\programacion 1\c_programacion1-master\array paralelo 09-09-19\practica\main.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+
+1568000310 c:\users\yago\desktop\workspace yago\programacion 1\c_programacion1-master\array paralelo 09-09-19\practica\utn.h
+

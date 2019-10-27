@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1569012247 source:e:\programacion\proyectos en c\alumnos\estructuras de alumnos definitiva\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"estructuras de alumnos.h"
+
+1569012164 e:\programacion\proyectos en c\alumnos\estructuras de alumnos definitiva\estructuras de alumnos.h
+	<stdio.h>
+
+1569012474 source:e:\programacion\proyectos en c\alumnos\estructuras de alumnos definitiva\estructuras de alumnos.c
+	"estructuras de alumnos.h"
+

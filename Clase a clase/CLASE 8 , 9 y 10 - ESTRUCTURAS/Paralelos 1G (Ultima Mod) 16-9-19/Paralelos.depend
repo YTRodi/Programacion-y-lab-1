@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1568671553 source:c:\users\alumno\desktop\paralelos\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1568673097 source:c:\users\yago\desktop\workspace yago\programacion 1\c_programacion1-master\clase 7 estructuras\paralelos 1g (ultima mod) 16-9-19\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

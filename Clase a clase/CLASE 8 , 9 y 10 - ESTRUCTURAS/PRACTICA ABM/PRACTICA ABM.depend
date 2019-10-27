@@ -1,0 +1,44 @@
+# depslib dependency file v1.0
+1569220926 source:c:\users\yago\desktop\practica abm\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1569279324 source:e:\practica abm\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1569298516 source:d:\practica abm\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1569597907 source:c:\users\yago\desktop\workspace yago\1. programacion\c_programacion1-master\clase 7 estructuras\practica abm\clientes.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"utn.h"
+	"clientes.h"
+
+1568603583 source:c:\users\yago\desktop\workspace yago\1. programacion\c_programacion1-master\clase 7 estructuras\practica abm\utn.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1569597806 source:c:\users\yago\desktop\workspace yago\1. programacion\c_programacion1-master\clase 7 estructuras\practica abm\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"utn.h"
+	"clientes.h"
+
+1568600246 c:\users\yago\desktop\workspace yago\1. programacion\c_programacion1-master\clase 7 estructuras\practica abm\utn.h
+
+1569593938 c:\users\yago\desktop\workspace yago\1. programacion\c_programacion1-master\clase 7 estructuras\practica abm\clientes.h
+

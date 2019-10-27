@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1570820123 source:c:\users\yago\desktop\ordenamiento de array de caracteres\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1568603583 source:c:\users\yago\desktop\ordenamiento de array de caracteres\utn.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+

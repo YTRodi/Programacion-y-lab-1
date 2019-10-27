@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1569025646 source:e:\clase 20-9-19 programacion estructuras\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+
