@@ -55,7 +55,7 @@ int main()
     //alt + 94. //"%[^,]," que lea hasta la coma y la excluya
 
 
-    while(!feof(archivo))//CON CONTRUCTOR
+    while(!feof(archivo))//CON CONSTRUCTOR
     {
         fscanf(archivo,"%[^,],%[^,],%[^,],%[^\n]\n",id,nombre,apellido,nota);//PRIMERO LAS VARIBLES, DESP LOS GUARDO EN ESTRUCTUARAS
 

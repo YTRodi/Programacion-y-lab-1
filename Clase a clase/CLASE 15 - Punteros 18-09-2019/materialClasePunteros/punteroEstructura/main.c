@@ -20,5 +20,9 @@ int main()
     printf("%.2f\n", (*p).sueldo );
     printf("%.2f", p->sueldo);
 
+    printf("\n%s\n", (*p).nombre );
+    printf("%s", p->nombre);
+
+
     return 0;
 }

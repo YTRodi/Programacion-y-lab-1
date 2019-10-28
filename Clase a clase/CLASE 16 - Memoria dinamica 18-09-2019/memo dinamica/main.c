@@ -31,12 +31,15 @@ int inicializarEmpleados(eEmpleado* vec, int tam);
 
 int main()
 {
-    int tam = 0;
-    //tam me dice el indice libre y me dice la cantidad que tengo en el array.
+    int tam = 0;//cumple dos funciones
+    //tam me dice el indice libre y me dice la cantidad de elementos que tengo en el array.
     eEmpleado* aux;
 
     /****HACER UN ABM DINAMICO***/
     eEmpleado* lista = (eEmpleado*)malloc(sizeof(eEmpleado)* (tam + 1));
+    //puntero en la memoria estatica que se llama lista
+    //lista guardaria la memoria del primer elemento
+    //tendria espacio para 5 empleados... un vector dinamico de tamaño
     //tam + 1 va entre parentesis
 
     /*if(inicializarEmpleados(lista,tam))
@@ -53,7 +56,9 @@ int main()
     //emp2  es el puntero
     //eEmpleado* emp2 = newEmpleado();
 
-    /**Dos maneras de cargar el id**/
+    /**Dos maneras de cargar el id
+    -Podria hacer alta cliente asi...
+    **/
     //emp2 ->id = 1234; //-> solamente par econtrar la variable id entera
     //printf("Ingrese id: ");
     //scanf("%d",&emp2->id);
@@ -82,9 +87,11 @@ int main()
 
 /***FUNCION CONSTRUCTORA DE MANERA DINAMICA***/
 /**
+-TODO ESTO PARA CONSEGUIR UN EMPLEADO, ES COMO --INICIALIZAR-- EMPLEADO.
 -CREA UN NUEVO ESPACIO EN MEMORIA.
 -LO CONSIGO EN TIEMPO DE EJECUCION.
--LO CONSIGO PERO NO CON TODOS LOS DATOS CARGADOS, LO RETORNO VACIO.**/
+-LO CONSIGO PERO NO CON TODOS LOS DATOS CARGADOS, LO RETORNO VACIO.
+-NULL = La no direccion de memoria**/
 eEmpleado* newEmpleado()
 {
     eEmpleado* nuevoEmpleado;
@@ -94,24 +101,28 @@ eEmpleado* newEmpleado()
 
     if(nuevoEmpleado != NULL)
     {
-        /**Inicializo los campos en 0***/
+        /**Inicializo y los limpio los campos en 0***/
         nuevoEmpleado ->id = 0;
-        strcpy(nuevoEmpleado->nombre,"");
+        strcpy(nuevoEmpleado->nombre,"");//cadena vacia
         nuevoEmpleado ->sueldo = 0;
         nuevoEmpleado ->estado = 0;
-
     }
     return nuevoEmpleado;
 }
 
 
 /**NO SE USA MAS LOS CORCHETES
-PUNTERO A CHAR NOMBRE***/
+PUNTERO A CHAR NOMBRE(cuando usemos un vector de caracteres)
+-Parametrizado.
+-Le paso el id,nombre y sueldo y me lo devuelve todo cargado.
+-***/
 eEmpleado* newEmpleadoParam(int id,char* nombre, float sueldo)
 {
-    eEmpleado* e = newEmpleado();//consigue malloc y me lo devuelve
+    eEmpleado* e = newEmpleado();//consigue malloc, consigue todo y me lo devuelve
 
-    /**A la hora de asignar ACA ADENTRO VALIDO EL id, nombre, sueldo, etc etc
+    /**
+    -Pido los datos, getstring getint etc etc
+    -A la hora de asignar ACA ADENTRO VALIDO EL id, nombre, sueldo, etc etc
     Recien ahi cargo y lo devuelvo.**/
     if(e != NULL)
     {
@@ -137,6 +148,10 @@ int mostrarEmpleado(eEmpleado* unEmpleado)
     return todoOk;
 }
 
+
+/**
+-
+***/
 int inicializarEmpleados(eEmpleado* vec, int tam)
 {
     int todoOk = 0;
@@ -145,11 +160,15 @@ int inicializarEmpleados(eEmpleado* vec, int tam)
     {
         for(int i = 0; i<tam;i++)
         {
+            /**ADENTRO DEL FOR NO PUEDO PONER LA FLECHITA**/
+            //VEC es un puntero a Lista
             //tiene que hacer la cuenta entre vec + i para que recorra todas las posiciones.
-            //i = sizeof de empleados
+            //i = sizeof de estructura de empleados(de 32 bytes(con uno solo), 64 bytes (con dos cargados)y asi sucesivamente)
             (vec + i)->estado = 0;
-            //(*(vec+i)).id = 0;//ESTO ES EXACTAMENTE LO MISMO
-            //vec+i es la dire de memoria pero si lo encierro con un y pongo asterisc obtengo la dire de esa dire de memoria
+            //(*(vec+i)).estado = 0;//ESTO ES EXACTAMENTE LO MISMO
+            //vec+i es la dire de memoria de esas estructuras
+            //pero si lo encierro con un y pongo asterisc es la variable estructura
+            //y si ya tengo la estructura puedo acceder con el punto...
         }
         todoOk = 1;
 
