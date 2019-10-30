@@ -1,14 +1,14 @@
 # depslib dependency file v1.0
-1572184274 source:c:\users\yago\desktop\programacion-y-lab-1\practica en casa\abm dinámico\utn.c
+1572368471 source:c:\users\yago\desktop\programacion-y-lab-1\practica en casa\abm dinámico\utn.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
 	<string.h>
 	"utn.h"
 
-1572184274 c:\users\yago\desktop\programacion-y-lab-1\practica en casa\abm dinámico\utn.h
+1572368471 c:\users\yago\desktop\programacion-y-lab-1\practica en casa\abm dinámico\utn.h
 
-1572231203 source:c:\users\yago\desktop\programacion-y-lab-1\practica en casa\abm dinámico\main.c
+1572369776 source:c:\users\yago\desktop\programacion-y-lab-1\practica en casa\abm dinámico\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

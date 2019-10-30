@@ -42,11 +42,11 @@ int main()
 
 
 
-    /*while( !feof(f))//mientras no llegue al final del archivo //!= 'EOF')//file end of file
+    while( !feof(f))//mientras no llegue al final del archivo //!= 'EOF')//file end of file
     {
         fread(nombre2,sizeof(char),20,f);//leo la cantidad que entra en nombre 2.
         printf("%s",nombre2);
-    }*/
+    }
 
     while( !feof(f))
     {

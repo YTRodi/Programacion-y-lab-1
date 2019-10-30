@@ -31,6 +31,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="MOCK_DATA (2).csv" />
 		<Unit filename="alumnos.c">
 			<Option compilerVar="CC" />
 		</Unit>

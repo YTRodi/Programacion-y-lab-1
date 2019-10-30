@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct{
+typedef struct
+{
 
-int id;
-char nombre[20];
-char sexo;
-float sueldo;
+    int id;
+    char nombre[20];
+    char sexo;
+    float sueldo;
 
-}ePersona;
+} ePersona;
 
 int main()
 {

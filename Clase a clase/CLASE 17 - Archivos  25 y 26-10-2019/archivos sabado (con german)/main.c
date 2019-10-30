@@ -59,11 +59,11 @@ int main()
     {
         fscanf(archivo,"%[^,],%[^,],%[^,],%[^\n]\n",id,nombre,apellido,nota);//PRIMERO LAS VARIBLES, DESP LOS GUARDO EN ESTRUCTUARAS
 
-        unAlumno = newAlumno();
+        //unAlumno = newAlumno();
 
         unAlumno = newAlumnoParametros(atoi(id),nombre,apellido,atof(nota));
 
-        setId(unAlumno,7);//solamente setea los id.
+        //setId(unAlumno,7);//solamente setea los id.
 
 
         *(lista+i) = unAlumno;

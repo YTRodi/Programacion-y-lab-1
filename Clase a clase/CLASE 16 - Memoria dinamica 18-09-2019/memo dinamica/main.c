@@ -31,11 +31,13 @@ int inicializarEmpleados(eEmpleado* vec, int tam);
 
 int main()
 {
-    int tam = 0;//cumple dos funciones
+    int tam = 0;
+    //cumple dos funciones
     //tam me dice el indice libre y me dice la cantidad de elementos que tengo en el array.
     eEmpleado* aux;
 
     /****HACER UN ABM DINAMICO***/
+    //NO IMPORTA EL BUSCAR LIBRE,PORQUE SIEMPRE VA A SER EL ULTIMO QUE ESTA LIBRE.
     eEmpleado* lista = (eEmpleado*)malloc(sizeof(eEmpleado)* (tam + 1));
     //puntero en la memoria estatica que se llama lista
     //lista guardaria la memoria del primer elemento
@@ -69,16 +71,28 @@ int main()
     //printf("%d",sizeof(eEmpleado));//PEDIMOS 32 BYTES DE MEMORIA
     eEmpleado* emp3 =  newEmpleadoParam(3322,"Yago",34000);
 
+    /**
+                !!!!!!!!!!!!SUPERIMPORTANTE!!!!!!!--
 
-    *(lista + tam) = *emp3;//lo agrego
-    //(lista + tam) es una direccion de memoria
+    - emp3 es la dire de memoria donde tengo guardado al empleado 3.
+    - *emp3 es el empleado(el valor.).
+    - lista + tam es al dire de memoria de esta variable
+    - *(lista+tam) es el valor de esta dire.
+    ***/
+
+    *(lista + tam) = *emp3;//TENGO QUE PONER ASTERISCO EMP3, ES EL EMPLEADO.
 
     //mostrarEmpleado(emp3);
 
     mostrarEmpleado(lista+tam);//verifico si esta un empleado
-    tam++;
+    tam++;//agrego un empleado y se va a ir sumando osea que hay que hacer tam ++
 
     aux = (eEmpleado*) realloc(lista,sizeof(eEmpleado) * (tam + 1));
+    /**
+    -1 que quiero realocar? lo que tengo en lista
+    -2 la cantidad que necesito
+    -3 siempre quiero uno mas del tamaño.
+    */
 
 
     return 0;

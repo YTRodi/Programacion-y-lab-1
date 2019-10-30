@@ -35,6 +35,7 @@ int main()
     //una array que adentro va a guardar punteros a la estructura empleados.
     //eEmpleado* emple = new_Empleado();
     int i = 0;
+    eEmpleado* emple;
 
 
     FILE* miArchivo;
@@ -54,9 +55,11 @@ int main()
     {
         fscanf(miArchivo,"%[^,],%[^,],%[^,],%[^\n]\n",legajo,nombre,apellido,sueldo);
 
-        eEmpleado* emple = new_Empleado();
+        emple = new_Empleado();
         //LO CREO ACA PORQUE NECESITO QUE VAYA CREANDO EN DISTINTAS INSTANCIAS LOS EMPLEADOS.
+
         /**Esto se crea en la pila(NO QUEREMOS ESO)**/
+        /**Puedo hacer una funcion parametrizada que use a new_Empleado y haga estas asignaciones...***/
         emple->legajo = atoi(legajo);
         strcpy(emple->nombre,nombre);
         strcpy(emple->apellido,apellido);
@@ -64,12 +67,6 @@ int main()
 
         *(lista+i) = emple;//otra forma --> lista[i]=emple;
         i++;
-
-        /*printf("| %7d | %15s | %15s | %15f |\n",
-               emple.legajo,
-               emple.nombre,
-               emple.apellido,
-               emple.sueldo);//esto asi solo le la cabecera del archivo.*/
     }
 
     fclose(miArchivo);

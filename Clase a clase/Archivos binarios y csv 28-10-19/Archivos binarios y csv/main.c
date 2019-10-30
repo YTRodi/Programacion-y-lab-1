@@ -11,6 +11,7 @@ typedef struct
 
 void escribrirBinario(char* path);
 void leerBinario(char* path);
+void mostrarEmpleado(eEmpleado vec[],int tam);
 
 int main()
 {
@@ -29,7 +30,7 @@ void escribrirBinario(char* path)
     //eEmpleado miEmpleado = {100,"Carlitos",1000};
     //Que pasa si escribo un array?
     eEmpleado miEmpleado[4] = {
-        {100,"Carlitos",12000},
+        {100,"Jorge",12000},
         {101,"Luis",20000},
         {102,"Facu",51000},
         {103,"Joaco",65000}
@@ -37,17 +38,22 @@ void escribrirBinario(char* path)
     FILE* miArchivo;//devuelve un puntero a FILE
     int i = 0;
 
-    //PATH es la dire del archivo
     //Hay que usar doble barra "d:\\..."
+    //PATH es la dire del archivo
     //.bin o .dat para archivos binarios.
     //wb de escritura binaria.
     miArchivo = fopen(path,"wb");
-    int len = 4;
+    int len = 4;//mcuantos datos utiles hay dentro del array?
+
 
     if(miArchivo != NULL)
     {
+        //fwrite puede guardar cualquier cosa que le pida.
         fwrite(&len,sizeof(int),1,miArchivo);
-        //1:dire de memoria,2.sizeof de la estructura,3.cantidad de datos que voy a guardar,4.El archivo
+        /*1:dire de memoria,
+        2.sizeof de la estructura(tamaño del dato),
+        3.cantidad de datos que voy a guardar(si fuera un string hago un strlen),
+        4.El archivo*/
         //fwrite(&miEmpleado,sizeof(eEmpleado),1,miArchivo);
 
         for(i = 0;i<4;i++)
@@ -64,7 +70,7 @@ void leerBinario(char* path)
 {
     //necesito una estructura que guarde el dato
     //eEmpleado bEmpleado;
-    eEmpleado bEmpleado[4];
+    eEmpleado bEmpleado[4];//guarda el dato.
     FILE* miArchivo;
     int i = 0;
     int len;
@@ -72,12 +78,13 @@ void leerBinario(char* path)
     miArchivo = fopen(path,"rb");
 
 
-    fread(&len,sizeof(int),1,miArchivo);//guardo en el len el valor 2
+    fread(&len,sizeof(int),1,miArchivo);//guardo en el len el valor 2.
     printf("\nLen : %d\n\n",len);
 
+    //este bloque lee desde a partir de la primera posicion del array
     fread(bEmpleado,sizeof(eEmpleado),len,miArchivo);//borro el &, leo 2 empleados
 
-    /*while(!feof(miArchivo))
+    /*while(!feof(miArchivo))//mientras no pueda leer el archivo leer.
     {
         //1.a donde guardo los datos que leo desde el archivo
         //2.
@@ -88,22 +95,32 @@ void leerBinario(char* path)
 
     }*/
 
+    fclose(miArchivo);
     //fread(bEmpleado,sizeof(eEmpleado),2,miArchivo);
 
-    fclose(miArchivo);
-
-    //mostrarEmpleado
-    printf(" ================================= \n");
-    printf("| Legajo|    Nombre  | Salario($) |\n");
-    printf(" ================================= \n");
-    for(i = 0;i<4;i++)
+    mostrarEmpleado(bEmpleado,4);
+    /*for(i = 0;i<4;i++)
     {
         printf("| %5d | %10s | %10.2f |\n",
            bEmpleado[i].legajo,
            bEmpleado[i].nombre,
            bEmpleado[i].salario);
         //getch();//es como un system pause
+    }*/
+
+}
+
+void mostrarEmpleado(eEmpleado vec[],int tam)
+{
+    printf(" ================================= \n");
+    printf("| Legajo|    Nombre  | Salario($) |\n");
+    printf(" ================================= \n");
+    for(int i = 0;i<tam;i++)
+    {
+        printf("| %5d | %10s |$%10.2f |\n",
+               vec[i].legajo,
+               vec[i].nombre,
+               vec[i].salario);
     }
     printf(" ================================= \n");
-
 }

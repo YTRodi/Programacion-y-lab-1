@@ -17,7 +17,7 @@ typedef struct
 /**Prototipos**/
 int menuGeneral();
 
-eCliente* newCliente();
+eCliente* new_Cliente();
 eCliente* newClienteParam(int id,char* nombre,char* apellido,float salario);
 int inicializarClientes(eCliente* listC,int tam);
 int buscarLibreCliente(eCliente* listCli,int tamCli);
@@ -27,15 +27,9 @@ int mostrarUnCliente(eCliente* unCliente);
 
 int main()
 {
-    int tam = 0;
-    //Creo un array dinamico.
-    eCliente* arrayCliente;//lista
-    arrayCliente = (eCliente*)malloc(sizeof(eCliente)*(TAM+1));
+    eCliente* arrayCliente[1] = {101,"Yago","Rodi",25000};
 
-    inicializarClientes(arrayCliente,TAM);
 
-    eCliente* emp;
-    emp = newClienteParam(1000,"Jebus","Rodi",25000);
 
     int exit;
 
@@ -44,8 +38,7 @@ int main()
         switch(menuGeneral())
         {
             case 1:
-                //printf("Alta\n");
-                altaCliente(arrayCliente,TAM);
+                printf("Alta\n");
                 break;
             case 2:
                 printf("Modificar\n");
@@ -54,8 +47,7 @@ int main()
                 printf("Baja\n");
                 break;
             case 4:
-                //printf("Listar\n");
-                mostrarUnCliente(arrayCliente);
+                printf("Listar\n");
                 break;
             case 5:
                 printf("Confirma salir? <s/n>: ");
@@ -92,15 +84,15 @@ int menuGeneral()
 }
 
 
-eCliente* newCliente()
+eCliente* new_Cliente()
 {
-    eCliente* nuevoCliente;
-    nuevoCliente = (eCliente*) malloc(sizeof(eCliente));
+    eCliente* nuevoCliente = (eCliente*) malloc(sizeof(eCliente));
 
     //Primero que nada, verifico si es distinto a NULL.
     if(nuevoCliente != NULL)
     {
         //Inicializo y limpio todos los campos(para que no contengan basura).
+        /**ESTO ES SETEAR!!!!!!***/
         nuevoCliente->id = 0;
         strcpy(nuevoCliente->nombre,"");//Le asigno una cadena vacia.
         strcpy(nuevoCliente->apellido,"");
@@ -113,13 +105,12 @@ eCliente* newCliente()
 
 eCliente* newClienteParam(int id,char* nombre,char* apellido,float salario)
 {
-    eCliente* nuevoClienteParam;
-    nuevoClienteParam = newCliente();//esto ya me va a devolver el cliente con un espacio en memoria e inicializado
-
+    eCliente* nuevoClienteParam = = newCliente();//esto ya me va a devolver el cliente con un espacio en memoria e inicializado
 
     //Recibe los datos por parametro y los asigna al id,nombre,apellido,salario,estado a la lista.
     if(nuevoClienteParam != NULL)
     {
+        /**ESTO ES GETTEAR!!!!!!***/
         nuevoClienteParam->id = id;
         strcpy(nuevoClienteParam->nombre,nombre);
         strcpy(nuevoClienteParam->apellido,apellido);
@@ -194,28 +185,6 @@ int altaCliente(eCliente* listCli,int tamCli)
     printf("||               ALTA CLIENTE                      ||\n");
     printf("  =================================================\n");
 
-    emp = newClienteParam(emp->id,emp->nombre,emp->apellido,emp->salario);
-
-    //index = buscarLibreCliente(listCli,tamCli);
-
-   // if(index == -1)
-   // {
-    //    printf("\nSistema completo.\n\n");
-   // }
-   // else
-   // {
-        /*getInt(&listCli->id,"Ingrese id: ","Error.Reingrese",1,1000,2);
-        getNombreOApellido(listCli->nombre,"Ingrese nombre: ","Error.Reingrese",2,35,2);
-        getNombreOApellido(listCli->apellido,"Ingrese apellido: ","Error.Reingrese",2,35,2);
-        getFloat(&listCli->salario,"Ingrese salario: ","Error.Reingrese",1,1000000,2);*/
-
-
-
-
-
-
-
-    //}
     return todoOk;
 }
 
