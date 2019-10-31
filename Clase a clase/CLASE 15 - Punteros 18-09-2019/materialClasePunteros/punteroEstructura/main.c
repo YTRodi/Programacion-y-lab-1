@@ -16,7 +16,7 @@ int main()
     ePersona p1 = {123, "Juan", 'm', 50000};
 
 
-    ePersona* p = &p1;
+    ePersona* p = &p1;//p es la lista...
 
     printf("%.2f\n", (*p).sueldo );
     printf("%.2f", p->sueldo);

@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1572184274 source:c:\users\yago\desktop\programacion-y-lab-1\campus virtual\clase 16 - punteros\load y print person\load y print person - punteros (video)\utn.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"utn.h"
+
+1572184274 c:\users\yago\desktop\programacion-y-lab-1\campus virtual\clase 16 - punteros\load y print person\load y print person - punteros (video)\utn.h
+
+1572550376 source:c:\users\yago\desktop\programacion-y-lab-1\campus virtual\clase 16 - punteros\load y print person\load y print person - punteros (video)\main.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+
