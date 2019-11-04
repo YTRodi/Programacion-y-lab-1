@@ -53,6 +53,7 @@ int main()
 
     while(!feof(miArchivo))
     {
+        //EXPRESION REGULAR "%[^,],"
         fscanf(miArchivo,"%[^,],%[^,],%[^,],%[^\n]\n",legajo,nombre,apellido,sueldo);
 
         emple = new_Empleado();
