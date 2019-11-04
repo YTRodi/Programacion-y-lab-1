@@ -3,6 +3,7 @@
 #include "LinkedList.h"
 #include "Employee.h"
 #include "parser.h"
+#include "utn.h"
 
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
@@ -85,7 +86,48 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_addEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+
+    int retorno = -1;
+    int controlAgrego;
+    //int auxId = 0;
+    char auxNombre[40];
+    int auxHorasTrabajadas = 0;
+    int auxSueldo = 0;
+    Employee* auxEmple = employee_new();
+
+    printf("\nALTA EMPLEADO\n");
+
+    if(auxEmple!=NULL)
+    {
+        if(getNombreOApellido(auxNombre,"\nIngrese nombre:","Error.Reingrese",2,40,2)!=-1)
+        {
+            if(getInt(&auxHorasTrabajadas,"\nIngrese horas trabajadas:","Error.Reingrese",1,1500,2)!=-1)
+            {
+                if(getInt(&auxSueldo,"\nIngrese sueldo:","Error.Reingrese",500,200000,2)!=-1)
+                {
+                    employee_setId(auxEmple,retorno);
+                    employee_setNombre(auxEmple,auxNombre);
+                    employee_setHorasTrabajadas(auxEmple,auxHorasTrabajadas);
+                    employee_setSueldo(auxEmple,auxSueldo);
+
+                    controlAgrego = ll_add(pArrayListEmployee,auxEmple);//los agrego al final del linkedlist.
+
+                    if(controlAgrego == 0)
+                    {
+                        printf("\nAlta exitosa\n");
+                        retorno = 0;
+                    }
+
+
+                }
+            }
+        }
+    }
+
+
+
+    return retorno;
+    //return 1;
 }
 
 /** \brief Modificar datos de empleado
@@ -175,31 +217,46 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
 {
-    int todoOk = 0;
-    FILE* f;
+    int retorno = -1;
+    //int todoOk = 0;
+    FILE* auxText;
     int len = ll_len(pArrayListEmployee);
+    Employee* auxEmple;
 
     if(pArrayListEmployee!=NULL && len>0 && path!=NULL)
     {
-        f = fopen(path,"w");
-        if(f==NULL)
+        auxText = fopen(path,"w");
+        if(auxText==NULL)
         {
             printf("\nNo se pudo abrir el archivo.\n");
             system("pause");
-            return todoOk;
+            return retorno;
             //exit(EXIT_FAILURE); EN UNA FUNCION NUNCA HACEMOS UN EXIT.
         }
 
-        //fprintf(f,"id,nombre,horasTrabajadas,sueldo\n");//ESCRIBO EL ENCABEZADO (LA PRIMER FILA
+
+        /**** --PARA IMPRIMIR EL ENCABEZADO DESTILDO ESTO.-- ****/
+        //fprintf(auxText,"id,nombre,horasTrabajadas,sueldo\n");
+
         for(int i=0;i<len;i++)
         {
-            fwrite(pArrayListEmployee,sizeof(LinkedList),len,f);
-            todoOk = 1;
+
+            auxEmple = (Employee*)ll_get(pArrayListEmployee,i);
+
+            if(auxEmple!=NULL)
+            {
+                fprintf(auxText,"%d,%s,%d,%d\n",auxEmple->id,auxEmple->nombre,auxEmple->horasTrabajadas,auxEmple->sueldo);
+                retorno = 0;
+            }
+
+            /*fwrite(pArrayListEmployee,sizeof(LinkedList),len,auxText);
+            fprintf(auxText,"%d,%s,%d,%d\n",ll_get(pArrayListEmployee,i));*(pArrayListEmployee+i))->id,(*(lista+i))->marca,(*(lista+i))->modelo,(*(lista+i))->precio);
+            retorno = 0;*/
         }
-        fclose(f);
+        fclose(auxText);
     }
 
-    return todoOk;
+    return retorno;
     //return 1;
 }
 
@@ -216,14 +273,19 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
     FILE* auxBin;
     int len = ll_len(pArrayListEmployee);
 
-    auxBin = fopen(path,"wb");
 
-    if(auxBin!=NULL && len>0 && path!=NULL && pArrayListEmployee!=NULL)
+    if(len>0 && path!=NULL && pArrayListEmployee!=NULL)
     {
-        for(int i=0;i<len;i++)
+        auxBin = fopen(path,"wb");
+        if(auxBin!=NULL)
         {
-            fwrite(ll_get(pArrayListEmployee,i),sizeof(Employee),1,auxBin);
+            for(int i=0;i<len;i++)
+            {
+                fwrite(ll_get(pArrayListEmployee,i),sizeof(Employee),1,auxBin);
+            }
         }
+
+
         fclose(auxBin);
         retorno = 0;
     }

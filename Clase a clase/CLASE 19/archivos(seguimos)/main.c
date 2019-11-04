@@ -81,7 +81,7 @@ int main()
 
     while(!feof(f))//1 = llego al final del archivo,
     {
-        cant = fscanf(f,"%[^,],%[^,],%[^,],%[^\n]\n",buffer[0],buffer[1],buffer[2],buffer[3]);//esto es para saltear el encabezado.
+        cant = fscanf(f,"%[^,],%[^,],%[^,],%[^\n]\n",buffer[0],buffer[1],buffer[2],buffer[3]);
         if(cant < 4)//significa que esta todo mal.
         {
             break;

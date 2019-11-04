@@ -22,15 +22,26 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
     if(nuevoEmpParam!=NULL)
     {
         if(employee_setId(nuevoEmpParam,atoi(idStr))
-           &&employee_setNombre(nuevoEmpParam,nombreStr)
-           &&employee_setHorasTrabajadas(nuevoEmpParam,atoi(horasTrabajadasStr))
-           &&employee_setSueldo(nuevoEmpParam,atoi(sueldoStr)) == 0)
+                &&employee_setNombre(nuevoEmpParam,nombreStr)
+                &&employee_setHorasTrabajadas(nuevoEmpParam,atoi(horasTrabajadasStr))
+                &&employee_setSueldo(nuevoEmpParam,atoi(sueldoStr)) == 0)
         {
-            free(nuevoEmpParam);
-            nuevoEmpParam = NULL;
+            /*free(nuevoEmpParam);
+            nuevoEmpParam = NULL;*/
+            employee_delete(nuevoEmpParam);
         }
+
     }
     return nuevoEmpParam;
+}
+
+void employee_delete(Employee* this)
+{
+    //HACERRRRRRRRRR
+    if(this!=NULL)
+    {
+        free(this);
+    }
 }
 
 int employee_setId(Employee* this,int id)
@@ -43,6 +54,29 @@ int employee_setId(Employee* this,int id)
     }
     return todoOk;
 }
+
+/*int employee_setId(Employee* this, int id)
+{
+    int retorno = -1;
+    static int maximoId = -1;
+    if(this != NULL)
+    {
+        retorno = 0;
+        if(id < 0)
+        {
+            maximoId++;
+            this->id = maximoId;
+        }
+        else
+        {
+            if(id > maximoId)
+                maximoId = id;
+            this->id = id;
+        }
+    }
+    return retorno;
+}*/
+
 
 int employee_getId(Employee* this,int* id)
 {
