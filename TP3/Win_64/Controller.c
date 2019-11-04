@@ -195,7 +195,6 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
         {
             fwrite(pArrayListEmployee,sizeof(LinkedList),len,f);
             todoOk = 1;
-            printf("SE GUARDO EXCELENTE PAPU");
         }
         fclose(f);
     }
@@ -213,6 +212,22 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 {
-    return 1;
+    int retorno = -1;
+    FILE* auxBin;
+    int len = ll_len(pArrayListEmployee);
+
+    auxBin = fopen(path,"wb");
+
+    if(auxBin!=NULL && len>0 && path!=NULL && pArrayListEmployee!=NULL)
+    {
+        for(int i=0;i<len;i++)
+        {
+            fwrite(ll_get(pArrayListEmployee,i),sizeof(Employee),1,auxBin);
+        }
+        fclose(auxBin);
+        retorno = 0;
+    }
+    return retorno;
+    //return 1;
 }
 

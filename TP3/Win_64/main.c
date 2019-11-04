@@ -36,7 +36,7 @@ int main()
                 break;
 
             case 2:
-                controller_loadFromBinary("data.bin",listaEmpleados);
+                controller_loadFromBinary("data2.bin",listaEmpleados);
                 break;
 
             case 6:
@@ -45,6 +45,10 @@ int main()
 
             case 8:
                 controller_saveAsText("data.csv",listaEmpleados);//NO FUNCA
+                break;
+
+            case 9:
+                controller_saveAsBinary("data2.bin",listaEmpleados);
                 break;
 
             case 10:
