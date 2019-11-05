@@ -5,7 +5,6 @@
 #include "parser.h"
 #include "utn.h"
 
-
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
  *
  * \param path char*
@@ -86,9 +85,8 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_addEmployee(LinkedList* pArrayListEmployee)
 {
-
     int retorno = -1;
-    int controlAgrego;
+    //int controlAgrego;
     //int auxId = 0;
     char auxNombre[40];
     int auxHorasTrabajadas = 0;
@@ -99,33 +97,27 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
 
     if(auxEmple!=NULL)
     {
-        if(getNombreOApellido(auxNombre,"\nIngrese nombre:","Error.Reingrese",2,40,2)!=-1)
+        if(getNombreOApellido(auxNombre,"\n<2-40 caract>\nIngrese nombre:","Error.Reingrese",2,40,2)!=-1)
         {
-            if(getInt(&auxHorasTrabajadas,"\nIngrese horas trabajadas:","Error.Reingrese",1,1500,2)!=-1)
+            if(getInt(&auxHorasTrabajadas,"\n<1-1500>\nIngrese horas trabajadas:","Error.Reingrese",1,1500,2)!=-1)
             {
-                if(getInt(&auxSueldo,"\nIngrese sueldo:","Error.Reingrese",500,200000,2)!=-1)
+                if(getInt(&auxSueldo,"\n<500-200000>\nIngrese sueldo:","Error.Reingrese",500,200000,2)!=-1)
                 {
                     employee_setId(auxEmple,retorno);
                     employee_setNombre(auxEmple,auxNombre);
                     employee_setHorasTrabajadas(auxEmple,auxHorasTrabajadas);
                     employee_setSueldo(auxEmple,auxSueldo);
+                    //controlAgrego = ll_add(pArrayListEmployee,auxEmple);
 
-                    controlAgrego = ll_add(pArrayListEmployee,auxEmple);//los agrego al final del linkedlist.
-
-                    if(controlAgrego == 0)
+                    if(!ll_add(pArrayListEmployee,auxEmple))//los agrego al final del linkedlist.
                     {
-                        printf("\nAlta exitosa\n");
+                        printf("\nAlta exitosa\n\n");
                         retorno = 0;
                     }
-
-
                 }
             }
         }
     }
-
-
-
     return retorno;
     //return 1;
 }
@@ -151,7 +143,28 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_removeEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+    int retorno = -1;
+    int idABajar;
+    int len = ll_len(pArrayListEmployee);
+
+    printf("\n--Baja Cliente--\n");
+
+    getInt(&idABajar,"\nIngrese id a dar de baja\n","Error.Reingrese",1,1500,2);
+
+    for(int i=0;i<len;i++)
+    {
+        if(idABajar == (ll_get(pArrayListEmployee,i)))
+        {
+            ll_remove(pArrayListEmployee,i);
+            printf("\nBaja exitosa\n");
+        }
+    }
+
+
+
+
+    return retorno;
+    //return 1;
 }
 
 /** \brief Listar empleados
@@ -165,10 +178,10 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
     Employee* auxEmple;
     int len = ll_len(pArrayListEmployee);
-    int auxId = 0;
+    /*int auxId = 0;
     char auxNombre[50];
     int auxHorasTrabajadas = 0;
-    int auxSueldo = 0;
+    int auxSueldo = 0;*/
 
     //for(int i=0;i<len;i++); para QUE ME MUESTRE TODO EL ARCHIVO
     for(int i=0;i<len;i++)
@@ -176,10 +189,10 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
         auxEmple = (Employee*) ll_get(pArrayListEmployee,i);//todo se va a guardar en auxEmple.
         if(auxEmple!=NULL)
         {
-            employee_getId(auxEmple,&auxId);
+            /*employee_getId(auxEmple,&auxId);
             employee_getNombre(auxEmple,auxNombre);
             employee_getHorasTrabajadas(auxEmple,&auxHorasTrabajadas);
-            employee_getSueldo(auxEmple,&auxSueldo);
+            employee_getSueldo(auxEmple,&auxSueldo);*/
             //printf("| %5d | %15s | %10d | %10d |\n",auxId,auxNombre,auxHorasTrabajadas,auxSueldo);
             employee_ShowOneEmployee(auxEmple);
         }

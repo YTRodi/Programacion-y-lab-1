@@ -13,7 +13,7 @@
 int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
 {
     int retorno = -1;
-    char buffer[4] [30];
+    char buffer[4][30];
     int cant = 0;//cantidad de variables que nos pudo retornar.
 
     /*char id[10];
