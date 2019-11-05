@@ -43,6 +43,9 @@ int main()
                 controller_addEmployee(listaEmpleados);
                 break;
 
+            case 4:
+                break;
+
             case 5:
                 controller_removeEmployee(listaEmpleados);
                 break;

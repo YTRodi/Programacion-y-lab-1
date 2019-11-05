@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Employee.h"
+#include "LinkedList.h"
 Employee* employee_new()
 {
     Employee* nuevoEmp = (Employee*)malloc(sizeof(Employee));
@@ -44,7 +45,7 @@ void employee_delete(Employee* this)
     }
 }
 
-/*int employee_setId(Employee* this,int id)
+int employee_setId(Employee* this,int id)
 {
     int todoOk = 0;
     if(this!=NULL && id>=1 && id<=1500)
@@ -53,9 +54,9 @@ void employee_delete(Employee* this)
         todoOk = 1;
     }
     return todoOk;
-}*/
+}
 
-int employee_setId(Employee* this, int id)
+/*int employee_setId(Employee* this, int id)
 {
     //ULTIMO CAMBIO CAMBIE RETORNO 0 POR 1.
     int retorno = -1;
@@ -76,7 +77,7 @@ int employee_setId(Employee* this, int id)
         }
     }
     return retorno;
-}
+}*/
 
 
 int employee_getId(Employee* this,int* id)
@@ -164,3 +165,11 @@ int employee_ShowOneEmployee(Employee* auxEmployee)
     return todoOk;
 }
 
+int IdAleatorio(void* this)
+{
+    int value = -1;
+
+    value = ll_len(this) + 1;
+
+    return value;
+}

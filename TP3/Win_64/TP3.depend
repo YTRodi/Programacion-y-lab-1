@@ -158,15 +158,16 @@
 	<string.h>
 	"Employee.h"
 
-1572885533 source:c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\employee.c
+1572928079 source:c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\employee.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"Employee.h"
+	"LinkedList.h"
 
-1572880424 c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\employee.h
+1572927121 c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\employee.h
 
-1572886471 source:c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\main.c
+1572928927 source:c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\main.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -175,26 +176,26 @@
 	"Employee.h"
 	"utn.h"
 
-1572702039 c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\linkedlist.h
+1572923876 c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\linkedlist.h
 
-1572834126 c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\controller.h
+1572923876 c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\controller.h
 
-1572656024 c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\utn.h
+1572923876 c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\utn.h
 
-1572656024 source:c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\utn.c
+1572923876 source:c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\utn.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
 	<string.h>
 	"utn.h"
 
-1572885170 source:c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\parser.c
+1572923876 source:c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\parser.c
 	<stdio.h>
 	<stdlib.h>
 	"LinkedList.h"
 	"Employee.h"
 
-1572886651 source:c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\controller.c
+1572929680 source:c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\controller.c
 	<stdio.h>
 	<stdlib.h>
 	"LinkedList.h"
@@ -202,7 +203,7 @@
 	"parser.h"
 	"utn.h"
 
-1572702039 c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\parser.h
+1572923876 c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\parser.h
 
 1572915122 source:d:\yagooo\programacion-y-lab-1\tp3\win_64\controller.c
 	<stdio.h>

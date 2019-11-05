@@ -27,5 +27,6 @@ int employee_getSueldo(Employee* this,int* sueldo);
 
 //agrego yo.
 int employee_ShowOneEmployee(Employee* this);
+int IdAleatorio(void* this);
 
 #endif // employee_H_INCLUDED
