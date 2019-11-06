@@ -25,41 +25,139 @@ int menuGeneral();
 
 int main()
 {
-    char exit = 's';
+    char exit = 'n';
+    int flag1 = 0;
+    int flag2 = 0;
     LinkedList* listaEmpleados = ll_newLinkedList();
 
-    do{
+    do
+    {
         switch(menuGeneral())
         {
             case 1:
-                controller_loadFromText("data.csv",listaEmpleados);
+                if(flag2 == 1)
+                {
+                    printf("\n--Ya se encuentra cargado el archivo BINARIO.--\n");
+                    warningPosterFile();
+                }
+                else
+                {
+                    if(controller_loadFromText("data.csv",listaEmpleados)==0)
+                    {
+                        printf("\nArchivo de TEXTO cargado correctamente.\n\n");
+                        flag1 = 1;
+                    }
+                    else
+                    {
+                        printf("\nNombre del archivo inexistente.\n\n");
+                    }
+                }
+
                 break;
 
             case 2:
-                controller_loadFromBinary("data.bin",listaEmpleados);
+                if(flag1 == 1)
+                {
+                    printf("\n--Ya se encuentra cargado el archivo de TEXTO.--\n");
+                    warningPosterFile();
+                }
+                else
+                {
+                    if(controller_loadFromBinary("data.bin",listaEmpleados)==0)
+                    {
+                        printf("\nArchivo BINARIO cargado correctamente.\n\n");
+                        flag2 = 1;
+                    }
+                    else
+                    {
+                        printf("\nNombre del archivo inexistente.\n\n");
+                    }
+                }
+
                 break;
 
             case 3:
-                controller_addEmployee(listaEmpleados);
+                if(flag1==1 || flag2==1)
+                {
+                    controller_addEmployee(listaEmpleados);
+                }
+                else
+                {
+                    errorUploadFileBefore();
+                }
+
                 break;
 
             case 4:
+                if(flag1==1 || flag2==1)
+                {
+                    controller_editEmployee(listaEmpleados);
+                }
+                else
+                {
+                    errorUploadFileBefore();
+                }
+
                 break;
 
             case 5:
-                controller_removeEmployee(listaEmpleados);
+                if(flag1==1 || flag2==1)
+                {
+                    controller_removeEmployee(listaEmpleados);
+                }
+                else
+                {
+                    errorUploadFileBefore();
+                }
+
                 break;
 
             case 6:
-                controller_ListEmployee(listaEmpleados);
+                if(flag1==1 || flag2==1)
+                {
+                    controller_ListEmployee(listaEmpleados);
+                }
+                else
+                {
+                    errorUploadFileBefore();
+                }
+
+                break;
+
+            case 7:
+                if(flag1==1 || flag2==1)
+                {
+                    controller_sortEmployee(listaEmpleados);
+                }
+                else
+                {
+                    errorUploadFileBefore();
+                }
+
                 break;
 
             case 8:
-                controller_saveAsText("dataText.csv",listaEmpleados);//NO FUNCA
+                if(flag1 == 1 || flag2 == 1)
+                {
+                    controller_saveAsText("data.csv",listaEmpleados);
+                    printf("\nDatos guardados con exito en el archivo de TEXTO.\n");
+                }
+                else
+                {
+                    errorUploadFileBefore();
+                }
                 break;
 
             case 9:
-                controller_saveAsBinary("data.bin",listaEmpleados);
+                if(flag1 == 1 || flag2 == 1)
+                {
+                    controller_saveAsBinary("data.bin",listaEmpleados);
+                    printf("\nDatos guardados con exito en el archivo BINARIO.\n");
+                }
+                else
+                {
+                    errorUploadFileBefore();
+                }
                 break;
 
             case 10:
@@ -69,9 +167,13 @@ int main()
                 printf("\n\n");
                 break;
 
+            default:
+                errorOptionInvalid();
+
         }
         system("pause");
-    }while(exit == 's');
+    }
+    while(exit != 's');
     return 0;
 }
 
@@ -80,21 +182,20 @@ int menuGeneral()
     int option;
     system("cls");
     printf("  ======================================================================================\n");
-    printf("||                                 ABM EMPLEADOS                                       ||\n");
+    printf("||                                 ABM EMPLEADOS                                        ||\n");
     printf("  ======================================================================================\n");
-    printf("||  (1)  Cargar los datos de los empleados desde el archivo data.csv (modo texto).     ||\n");
-    printf("||  (2)  Cargar los datos de los empleados desde el archivo data.bin (modo binario).   ||\n");
-    printf("||  (3)  Alta de empleado.                                                             ||\n");
-    printf("||  (4)  Modificar datos de empleado                                                   ||\n");
-    printf("||  (5)  Baja de empleado.                                                             ||\n");
-    printf("||  (6)  Listar empleados.                                                             ||\n");
-    printf("||  (7)  Ordenar empleados.                                                            ||\n");
-    printf("||  (8)  Guardar los datos de los empleados en el archivo data.csv (modo texto).       ||\n");
-    printf("||  (9)  Guardar los datos de los empleados en el archivo data.bin (modo binario).     ||\n");
-    printf("||  (10) Salir.                                                                        ||\n");
+    printf("||  (1)  Cargar los datos de los empleados desde el archivo data.csv (modo texto).      ||\n");
+    printf("||  (2)  Cargar los datos de los empleados desde el archivo data.bin (modo binario).    ||\n");
+    printf("||  (3)  Alta de empleado.                                                              ||\n");
+    printf("||  (4)  Modificar datos de empleado                                                    ||\n");
+    printf("||  (5)  Baja de empleado.                                                              ||\n");
+    printf("||  (6)  Listar empleados.                                                              ||\n");
+    printf("||  (7)  Ordenar empleados.                                                             ||\n");
+    printf("||  (8)  Guardar los datos de los empleados en el archivo data.csv (modo texto).        ||\n");
+    printf("||  (9)  Guardar los datos de los empleados en el archivo data.bin (modo binario).      ||\n");
+    printf("||  (10) Salir.                                                                         ||\n");
     printf("  ======================================================================================\n");
     getInt(&option,"Elija opcion: ","Error. Reingrese\n",1,10,2);
     return option;
 }
-
 

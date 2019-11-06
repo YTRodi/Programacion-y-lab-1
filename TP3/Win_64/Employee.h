@@ -1,5 +1,6 @@
 #ifndef employee_H_INCLUDED
 #define employee_H_INCLUDED
+
 typedef struct
 {
     int id;
@@ -28,5 +29,28 @@ int employee_getSueldo(Employee* this,int* sueldo);
 //agrego yo.
 int employee_ShowOneEmployee(Employee* this);
 int IdAleatorio(void* this);
+
+//Menu
+int menuModificacion();
+int menuOrder();
+int menuHowDoYouWantToOrder();
+
+//Comparison
+int employee_compareById(void* employee1,void* employee2);
+int employee_compareByName(void* employee1,void* employee2);
+int employee_compareByHT(void* employee1,void* employee2);
+int employee_compareBySalary(void* employee1,void* employee2);
+int employee_comparteByIdAndName(void* employee1,void* employee2);
+
+
+
+//MESSAGES
+void errorPosterFile();
+void errorPosterId();
+void warningPosterFile();
+void errorUploadFileBefore();
+void errorOptionInvalid();
+void operationCancelled();
+
 
 #endif // employee_H_INCLUDED
