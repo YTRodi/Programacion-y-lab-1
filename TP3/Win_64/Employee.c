@@ -1,9 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+
 #include "Employee.h"
-#include "LinkedList.h"
-#include "utn.h"
+
 Employee* employee_new()
 {
     Employee* nuevoEmp = (Employee*)malloc(sizeof(Employee));
@@ -166,7 +163,37 @@ int employee_ShowOneEmployee(Employee* auxEmployee)
     return todoOk;
 }
 
-int IdAleatorio(void* this)
+int employee_ListEmployees(LinkedList* pArrayListEmployee)
+{
+    int todoOk = 0;
+    int len = ll_len(pArrayListEmployee);
+
+    if(pArrayListEmployee!=NULL)
+    {
+        system("cls");
+        printf("  ===================================================\n");
+        printf("||   ID  |     NOMBRE      |   HORAS T. |   SUELDO   ||\n");
+        printf("  ===================================================\n");
+
+        for(int i=0;i<len;i++)
+        {
+            employee_ShowOneEmployee((Employee*)ll_get(pArrayListEmployee,i));
+            todoOk = 1;
+        }
+
+    }
+    if(todoOk == 0)
+    {
+        printf("  ===================================================\n");
+        printf("||  Error: No se pudo cargar la lista.               ||\n");
+        printf("  ===================================================\n");
+    }
+
+    return todoOk;
+}
+
+
+int generateId(void* this)
 {
     int value = -1;
 
@@ -321,7 +348,7 @@ int employee_compareBySalary(void* employee1,void* employee2)
     return retorno;
 }
 
-int employee_comparteByIdAndName(void* employee1,void* employee2)
+/*int employee_comparteByIdAndName(void* employee1,void* employee2)
 {
     int retorno;
 
@@ -333,7 +360,7 @@ int employee_comparteByIdAndName(void* employee1,void* employee2)
 
     }
     return retorno;
-}
+}*/
 
 
 

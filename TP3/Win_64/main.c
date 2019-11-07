@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+#include <ctype.h>
 #include "LinkedList.h"
 #include "Controller.h"
 #include "Employee.h"
@@ -25,9 +26,10 @@ int menuGeneral();
 
 int main()
 {
-    char exit = 'n';
+    char exit;
     int flag1 = 0;
     int flag2 = 0;
+
     LinkedList* listaEmpleados = ll_newLinkedList();
 
     do
@@ -140,7 +142,10 @@ int main()
                 if(flag1 == 1 || flag2 == 1)
                 {
                     controller_saveAsText("data.csv",listaEmpleados);
-                    printf("\nDatos guardados con exito en el archivo de TEXTO.\n");
+                    printf("  ===================================================\n");
+                    printf("||  Datos guardados con exito en el archivo de     ||\n");
+                    printf("||        TEXTO.                                   ||\n");
+                    printf("  ===================================================\n");
                 }
                 else
                 {
@@ -152,7 +157,11 @@ int main()
                 if(flag1 == 1 || flag2 == 1)
                 {
                     controller_saveAsBinary("data.bin",listaEmpleados);
-                    printf("\nDatos guardados con exito en el archivo BINARIO.\n");
+
+                    printf("  ===================================================\n");
+                    printf("||  Datos guardados con exito en el archivo        ||\n");
+                    printf("||        BINARIO.                                 ||\n");
+                    printf("  ===================================================\n");
                 }
                 else
                 {
@@ -163,7 +172,8 @@ int main()
             case 10:
                 printf("\nConfirma salir? <s/n>: ");
                 fflush(stdin);
-                exit = getche();
+                scanf("%c",&exit);
+                exit = tolower(exit);
                 printf("\n\n");
                 break;
 
@@ -198,4 +208,5 @@ int menuGeneral()
     getInt(&option,"Elija opcion: ","Error. Reingrese\n",1,10,2);
     return option;
 }
+
 

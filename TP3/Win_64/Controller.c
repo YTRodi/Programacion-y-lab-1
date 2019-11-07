@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+#include <ctype.h>
 #include "LinkedList.h"
 #include "Employee.h"
 #include "parser.h"
@@ -26,7 +27,6 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
         controlCarga = parser_EmployeeFromText(f,pArrayListEmployee);
         if(controlCarga != -1)
             retorno = 0;
-
     }
     else
     {
@@ -95,13 +95,13 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
 
     if(auxEmple!=NULL)
     {
-        if(IdAleatorio(pArrayListEmployee)!=-1)
+        if(generateId(pArrayListEmployee)!=-1)
         {
-            auxId = IdAleatorio(pArrayListEmployee);
+            auxId = generateId(pArrayListEmployee);
 
             if(getNombreOApellido(auxNombre,"\n<2-40 caract>\nIngrese nombre:","Error.Reingrese\n",2,40,2)!=-1)
             {
-                if(getInt(&auxHorasTrabajadas,"\n<1-1500>\nIngrese horas trabajadas:","Error.Reingrese\n",1,1500,2)!=-1)
+                if(getInt(&auxHorasTrabajadas,"\n<1-1000>\nIngrese horas trabajadas por mes:","Error.Reingrese\n",1,1000,2)!=-1)
                 {
                     if(getInt(&auxSueldo,"\n<500-200000>\nIngrese sueldo:","Error.Reingrese\n",500,200000,2)!=-1)
                     {
@@ -150,8 +150,11 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
     printf("||                MODIFICAR EMPLEADO                 ||\n");
     printf("  ===================================================\n");
 
+
     if(pArrayListEmployee!=NULL)
     {
+        employee_ListEmployees(pArrayListEmployee);
+
         getInt(&idAMod,"\nIngrese ID a modificar: ","Error.Reingrese\n",1,1500,2);
 
         for(int i=0; i<len; i++)
@@ -181,7 +184,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
                         break;
 
                     case 2:
-                        if(getInt(&this->horasTrabajadas,"\n<1-1500>\nIngrese nuevas horas trabajadas:","Error.Reingrese\n",1,1500,2)!=-1)
+                        if(getInt(&this->horasTrabajadas,"\n<1-1000>\nIngrese nuevas horas trabajadas:","Error.Reingrese\n",1,1000,2)!=-1)
                         {
                             retorno = 0;
                             printf("  ===================================================\n");
@@ -243,6 +246,8 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
 
     if(pArrayListEmployee!=NULL)
     {
+        employee_ListEmployees(pArrayListEmployee);
+
         getInt(&idABajar,"\nIngrese ID a dar de baja: ","Error.Reingrese\n",1,1500,2);
 
         for(int i=0; i<len; i++)
@@ -254,6 +259,7 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
                 printf("  ===================================================\n");
                 printf("||   ID  |     NOMBRE      |   HORAS T. |   SUELDO   ||\n");
                 printf("  ===================================================\n");
+
                 //Muestro el empleado a dar de baja...
                 employee_ShowOneEmployee(this);
 
@@ -261,7 +267,8 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
 
                 printf("\nconfirma baja? <s/n>: ");
                 fflush(stdin);
-                confirma = getche();
+                scanf("%c",&confirma);
+                confirma = tolower(confirma);
                 printf("\n");
 
                 if(confirma == 's')
@@ -312,33 +319,15 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
-    Employee* auxEmple;
-    int len = ll_len(pArrayListEmployee);
+   int retorno = -1;
 
-
-    printf("  ===================================================\n");
-    printf("||   ID  |     NOMBRE      |   HORAS T. |   SUELDO   ||\n");
-    printf("  ===================================================\n");
-
-    for(int i=0; i<len; i++)
+    if(employee_ListEmployees(pArrayListEmployee))
     {
-        auxEmple = (Employee*) ll_get(pArrayListEmployee,i);
-        //ll_get al devolver un puntero a void lo casteo al tipo Employee.
-        //todo se va a guardar en auxEmple.
-
-        if(auxEmple!=NULL && len>0)
-        {
-            /*employee_getId(auxEmple,&auxId);
-            employee_getNombre(auxEmple,auxNombre);
-            employee_getHorasTrabajadas(auxEmple,&auxHorasTrabajadas);
-            employee_getSueldo(auxEmple,&auxSueldo)
-            //printf("| %5d | %15s | %10d | %10d |\n",auxId,auxNombre,auxHorasTrabajadas,auxSueldo);*/
-
-            employee_ShowOneEmployee(auxEmple);
-        }
+        retorno = 0;
     }
 
-    return 1;
+    return retorno;
+    //return 1;
 }
 
 /** \brief Ordenar empleados

@@ -158,20 +158,21 @@
 	<string.h>
 	"Employee.h"
 
-1572998405 source:c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\employee.c
+1573145505 source:c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\employee.c
+	"Employee.h"
+
+1573145526 c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\employee.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
-	"Employee.h"
 	"LinkedList.h"
 	"utn.h"
 
-1572998420 c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\employee.h
-
-1572996472 source:c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\main.c
+1573146529 source:c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\main.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
+	<ctype.h>
 	"LinkedList.h"
 	"Controller.h"
 	"Employee.h"
@@ -179,7 +180,7 @@
 
 1572923876 c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\linkedlist.h
 
-1572997844 c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\controller.h
+1573142129 c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\controller.h
 
 1572923876 c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\utn.h
 
@@ -196,10 +197,11 @@
 	"LinkedList.h"
 	"Employee.h"
 
-1572997954 source:c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\controller.c
+1573146122 source:c:\users\yago\desktop\programacion-y-lab-1\tp3\win_64\controller.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
+	<ctype.h>
 	"LinkedList.h"
 	"Employee.h"
 	"parser.h"

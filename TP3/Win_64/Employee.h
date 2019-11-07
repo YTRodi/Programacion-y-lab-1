@@ -1,6 +1,12 @@
 #ifndef employee_H_INCLUDED
 #define employee_H_INCLUDED
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "LinkedList.h"
+#include "utn.h"
+
 typedef struct
 {
     int id;
@@ -28,7 +34,8 @@ int employee_getSueldo(Employee* this,int* sueldo);
 
 //agrego yo.
 int employee_ShowOneEmployee(Employee* this);
-int IdAleatorio(void* this);
+int employee_ListEmployees(LinkedList* pArrayListEmployee);
+int generateId(void* this);
 
 //Menu
 int menuModificacion();
