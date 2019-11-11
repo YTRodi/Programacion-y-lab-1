@@ -15,9 +15,9 @@ typedef struct
     int sueldo;
 }Employee;
 
+int menuGeneral();
 Employee* employee_new();
 Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr,char* sueldoStr);
-//void employee_delete();
 void employee_delete(Employee* this);
 
 int employee_setId(Employee* this,int id);
@@ -32,10 +32,10 @@ int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas);
 int employee_setSueldo(Employee* this,int sueldo);
 int employee_getSueldo(Employee* this,int* sueldo);
 
-//agrego yo.
+
+//Listar
 int employee_ShowOneEmployee(Employee* this);
 int employee_ListEmployees(LinkedList* pArrayListEmployee);
-int generateId(void* this);
 
 //Menu
 int menuModificacion();
@@ -47,9 +47,9 @@ int employee_compareById(void* employee1,void* employee2);
 int employee_compareByName(void* employee1,void* employee2);
 int employee_compareByHT(void* employee1,void* employee2);
 int employee_compareBySalary(void* employee1,void* employee2);
-int employee_comparteByIdAndName(void* employee1,void* employee2);
 
-
+//Delete linkedList
+//int employee_deleteLinkedList(LinkedList* this);
 
 //MESSAGES
 void errorPosterFile();

@@ -5,9 +5,9 @@
 
 /** \brief Parsea los datos los datos de los empleados desde el archivo data.csv (modo texto).
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param pFile FILE* Direecion de la ubicacion del archivo.
+ * \param pArrayListEmployee LinkedList* Puntero a la estructura LinkedList.
+ * \return int Retorna [0] si se cargo correctamente - [-1] Si hubo un error.
  *
  */
 int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
@@ -15,16 +15,7 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
     int retorno = -1;
     char buffer[4][30];
     int cant = 0;//cantidad de variables que nos pudo retornar.
-
-    /*char id[10];
-    char nombre[50];
-    char horasTrabajadas[10];
-    char sueldo[30];*/
-
-    //int control;
     Employee* auxEmple;
-
-    //fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",id,nombre,horasTrabajadas,sueldo);
 
     fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",buffer[0],buffer[1],buffer[2],buffer[3]);
 
@@ -51,47 +42,23 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
                 ll_add(pArrayListEmployee,auxEmple);//agrego un puntero al final del linkedlist.
                 retorno=0;
             }
-
-
-
-
         }
     }
-
-   /* while(!feof(pFile))
-    {
-        fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",id,nombre,horasTrabajadas,sueldo);
-
-        auxEmple = employee_newParametros(id,nombre,horasTrabajadas,sueldo);
-
-        //ACA ESTABA EL ERRORRRRRRRRRRRRRRRR LAREPTM
-
-        if(auxEmple != NULL)
-        {
-            ll_add(pArrayListEmployee,auxEmple);
-            retorno = 0;
-        }
-    }*/
-
     return retorno;
-    //return 1;
 }
 
-/** \brief Parsea los datos los datos de los empleados desde el archivo data.csv (modo binario).
+/** \brief Parsea los datos los datos de los empleados desde el archivo data.bin (modo binario).
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param pFile FILE* Direecion de la ubicacion del archivo.
+ * \param pArrayListEmployee LinkedList* Puntero a la estructura LinkedList.
+ * \return int Retorna [0] si se cargo correctamente - [-1] Si hubo un error.
  *
  */
 int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 {
     int retorno = -1;
-    //int leido=0;
-    Employee* auxEmple = NULL;// = employee_new();
+    Employee* auxEmple = NULL;
     int cant = 0;
-
-    //fread(auxEmple,sizeof(Employee),1,pFile);
 
     while(!feof(pFile))
     {
@@ -104,6 +71,8 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 
         cant = fread(auxEmple,sizeof(Employee),1,pFile);
 
+        employee_setId(auxEmple,auxEmple->id);
+
         if(cant<1)//significa que estaria todo mal
         {
             break;
@@ -114,16 +83,7 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
             retorno = 0;
         }
 
-
-        /*leido = fread(auxEmple,sizeof(Employee),1,pFile);
-
-        if(auxEmple!=NULL && leido!=0)
-        {
-            ll_add(pArrayListEmployee,auxEmple);
-            retorno = 0;
-        }*/
     }
 
     return retorno;
-    //return 1;
 }

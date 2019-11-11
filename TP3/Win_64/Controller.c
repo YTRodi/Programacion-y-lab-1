@@ -9,9 +9,9 @@
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param path char* Direecion de la ubicacion del archivo.
+ * \param pArrayListEmployee LinkedList* Puntero a la estructura LinkedList.
+ * \return int Retorna [0] si se cargo correctamente - [-1] Si hubo un error.
  *
  */
 int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
@@ -35,16 +35,15 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
 
     fclose(f);//cierro
 
-    //return 1;
     return retorno;
 
 }
 
-/** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
+/** \brief Carga los datos de los empleados desde el archivo data.bin (modo binario).
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param path char* Direecion de la ubicacion del archivo.
+ * \param pArrayListEmployee LinkedList* Puntero a la estructura LinkedList.
+ * \return int Retorna [0] si se cargo correctamente - [-1] Si hubo un error.
  *
  */
 int controller_loadFromBinary(char* path, LinkedList* pArrayListEmployee)
@@ -68,21 +67,19 @@ int controller_loadFromBinary(char* path, LinkedList* pArrayListEmployee)
 
     fclose(f);//cierro
 
-    //return 1;
     return retorno;
 }
 
-/** \brief Alta de empleados
+/** \brief Alta de empleados.
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param pArrayListEmployee LinkedList* Puntero a la estructura LinkedList.
+ * \return int Retorna [0] si se dio de alta correctamente - [-1] Si hubo un error.
  *
  */
 int controller_addEmployee(LinkedList* pArrayListEmployee)
 {
     int retorno = -1;
-    int auxId = 0;
+    //int auxId = 0;
     char auxNombre[40];
     int auxHorasTrabajadas = 0;
     int auxSueldo = 0;
@@ -95,47 +92,40 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
 
     if(auxEmple!=NULL)
     {
-        if(generateId(pArrayListEmployee)!=-1)
+        if(getNombreOApellido(auxNombre,"\n<2-40 caract>\nIngrese nombre:","Error.Reingrese\n",2,40,2)!=-1)
         {
-            auxId = generateId(pArrayListEmployee);
-
-            if(getNombreOApellido(auxNombre,"\n<2-40 caract>\nIngrese nombre:","Error.Reingrese\n",2,40,2)!=-1)
+            if(getInt(&auxHorasTrabajadas,"\n<1-1000>\nIngrese horas trabajadas por mes:","Error.Reingrese\n",1,1000,2)!=-1)
             {
-                if(getInt(&auxHorasTrabajadas,"\n<1-1000>\nIngrese horas trabajadas por mes:","Error.Reingrese\n",1,1000,2)!=-1)
+                if(getInt(&auxSueldo,"\n<500-200000>\nIngrese sueldo:","Error.Reingrese\n",500,200000,2)!=-1)
                 {
-                    if(getInt(&auxSueldo,"\n<500-200000>\nIngrese sueldo:","Error.Reingrese\n",500,200000,2)!=-1)
-                    {
-                        employee_setId(auxEmple,auxId);
-                        employee_setNombre(auxEmple,auxNombre);
-                        employee_setHorasTrabajadas(auxEmple,auxHorasTrabajadas);
-                        employee_setSueldo(auxEmple,auxSueldo);
-                        //controlAgrego = ll_add(pArrayListEmployee,auxEmple);
+                    employee_setId(auxEmple,-1);
+                    employee_setNombre(auxEmple,auxNombre);
+                    employee_setHorasTrabajadas(auxEmple,auxHorasTrabajadas);
+                    employee_setSueldo(auxEmple,auxSueldo);
 
-                        if(!ll_add(pArrayListEmployee,auxEmple))//los agrego al final del linkedlist.
-                        {
-                            printf("  ===================================================\n");
-                            printf("||                -- Alta exitosa --                 ||\n");
-                            printf("  ===================================================\n");
-                            retorno = 0;
-                        }
+                    if(!ll_add(pArrayListEmployee,auxEmple))//los agrego al final del linkedlist.
+                    {
+                        printf("  ===================================================\n");
+                        printf("||                -- Alta exitosa --                 ||\n");
+                        printf("  ===================================================\n");
+                        retorno = 0;
                     }
                 }
             }
         }
+
     }
     if(retorno == -1)
     {
         errorOptionInvalid();
     }
     return retorno;
-    //return 1;
 }
 
-/** \brief Modificar datos de empleado
+/** \brief Modificar datos de empleado.
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param pArrayListEmployee LinkedList* Puntero a la estructura LinkedList.
+ * \return int Retorna [0] si se modifico correctamente - [-1] Si hubo un error.
  *
  */
 int controller_editEmployee(LinkedList* pArrayListEmployee)
@@ -153,7 +143,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 
     if(pArrayListEmployee!=NULL)
     {
-        employee_ListEmployees(pArrayListEmployee);
+        //employee_ListEmployees(pArrayListEmployee);
 
         getInt(&idAMod,"\nIngrese ID a modificar: ","Error.Reingrese\n",1,1500,2);
 
@@ -173,43 +163,43 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 
                 switch(menuModificacion())
                 {
-                    case 1:
-                        if(getString(this->nombre,"<2-40 caract>\nIngrese nuevo nombre:","Error.Reingrese\n",2,40,2)!=-1)
-                        {
-                            retorno = 0;
-                            printf("  ===================================================\n");
-                            printf("||            -- Modificacion exitosa --             ||\n");
-                            printf("  ===================================================\n");
-                        }
-                        break;
-
-                    case 2:
-                        if(getInt(&this->horasTrabajadas,"\n<1-1000>\nIngrese nuevas horas trabajadas:","Error.Reingrese\n",1,1000,2)!=-1)
-                        {
-                            retorno = 0;
-                            printf("  ===================================================\n");
-                            printf("||            -- Modificacion exitosa --             ||\n");
-                            printf("  ===================================================\n");
-                        }
-                        break;
-
-                    case 3:
-                        if(getInt(&this->sueldo,"\n<500-200000>\nIngrese nuevo sueldo:","Error.Reingrese\n",500,200000,2)!=-1)
-                        {
-                            retorno = 0;
-                            printf("  ===================================================\n");
-                            printf("||            -- Modificacion exitosa --             ||\n");
-                            printf("  ===================================================\n");
-                        }
-                        break;
-
-                    case 4:
-                        operationCancelled();
+                case 1:
+                    if(getNombreOApellido(this->nombre,"<2-40 caract>\nIngrese nuevo nombre:","Error.Reingrese\n",2,40,2)!=-1)
+                    {
                         retorno = 0;
-                        break;
+                        printf("  ===================================================\n");
+                        printf("||            -- Modificacion exitosa --             ||\n");
+                        printf("  ===================================================\n");
+                    }
+                    break;
 
-                    default:
-                        errorOptionInvalid();
+                case 2:
+                    if(getInt(&this->horasTrabajadas,"\n<1-1000>\nIngrese nuevas horas trabajadas:","Error.Reingrese\n",1,1000,2)!=-1)
+                    {
+                        retorno = 0;
+                        printf("  ===================================================\n");
+                        printf("||            -- Modificacion exitosa --             ||\n");
+                        printf("  ===================================================\n");
+                    }
+                    break;
+
+                case 3:
+                    if(getInt(&this->sueldo,"\n<500-200000>\nIngrese nuevo sueldo:","Error.Reingrese\n",500,200000,2)!=-1)
+                    {
+                        retorno = 0;
+                        printf("  ===================================================\n");
+                        printf("||            -- Modificacion exitosa --             ||\n");
+                        printf("  ===================================================\n");
+                    }
+                    break;
+
+                case 4:
+                    operationCancelled();
+                    retorno = 0;
+                    break;
+
+                default:
+                    errorOptionInvalid();
                 }
             }
         }
@@ -219,15 +209,13 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
         errorPosterId();
     }
 
-
-    return 1;
+    return retorno;
 }
 
-/** \brief Baja de empleado
+/** \brief Baja de empleado.
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param pArrayListEmployee LinkedList* Puntero a la estructura LinkedList.
+ * \return int Retorna [0] si se dio de baja correctamente - [-1] Si hubo un error.
  *
  */
 int controller_removeEmployee(LinkedList* pArrayListEmployee)
@@ -246,7 +234,7 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
 
     if(pArrayListEmployee!=NULL)
     {
-        employee_ListEmployees(pArrayListEmployee);
+        //employee_ListEmployees(pArrayListEmployee);
 
         getInt(&idABajar,"\nIngrese ID a dar de baja: ","Error.Reingrese\n",1,1500,2);
 
@@ -307,19 +295,17 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
     }
 
     return retorno;
-    //return 1;
 }
 
-/** \brief Listar empleados
+/** \brief Listar empleados.
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param pArrayListEmployee LinkedList* Puntero a la estructura LinkedList.
+ * \return int Retorna [0] si se dio de baja correctamente - [-1] Si hubo un error.
  *
  */
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
-   int retorno = -1;
+    int retorno = -1;
 
     if(employee_ListEmployees(pArrayListEmployee))
     {
@@ -327,14 +313,12 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
     }
 
     return retorno;
-    //return 1;
 }
 
 /** \brief Ordenar empleados
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param pArrayListEmployee LinkedList* Puntero a la estructura LinkedList.
+ * \return int Retorna [0] si se ordeno correctamente - [-1] Si hubo un error.
  *
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
@@ -347,138 +331,88 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
     printf("  ===================================================\n");
     switch(menuOrder())
     {
-        case 1:
-            switch(menuHowDoYouWantToOrder())
-            {
-                case 1://ascendente
-                    ll_sort(pArrayListEmployee,employee_compareById,0);
-                    printf("\n..::Ordenamiento por Id efecutado con exito::..\n\n");
-                    /*if(ll_sort(pArrayListEmployee,employee_compareById,0)==0)
-                    {
-                        printf("\n..::Ordenamiento por Id efecutado con exito::..\n\n");
-                        retorno = 0;
-                    }*/
-                    break;
-
-                case 2://descendente
-                    ll_sort(pArrayListEmployee,employee_compareById,1);
-                    printf("\n..::Ordenamiento por Id efecutado con exito::..\n\n");
-                    /*if(ll_sort(pArrayListEmployee,employee_compareById,1)==0)
-                    {
-                        printf("\n..::Ordenamiento por Id efecutado con exito::..\n\n");
-                        retorno = 0;
-                    }*/
-                    break;
-
-                default:
-                    errorOptionInvalid();
-                    printf("  ===================================================\n");
-                    printf("||  Error: usted ingreso una opcion invalida,        ||\n");
-                    printf("||         sera redireccionado al menu.              ||\n");
-                    printf("  ===================================================\n");
-            }
-            break;//fin case 1
-
-        case 2:
-            switch(menuHowDoYouWantToOrder())
-            {
-                case 1://ascendente
-                    ll_sort(pArrayListEmployee,employee_compareByName,0);
-                    printf("\n..::Ordenamiento por Nombre efecutado con exito::..\n\n");
-                    /*if(ll_sort(pArrayListEmployee,employee_compareByName,0)==0)
-                    {
-                        printf("\n..::Ordenamiento por Nombre efecutado con exito::..\n\n");
-                    }
-                    else
-                    {
-                        printf("\nNo se pudo ordenar.\n");
-                    }*/
-                    break;
-
-                case 2://descendente
-                    ll_sort(pArrayListEmployee,employee_compareByName,1);
-                    printf("\n..::Ordenamiento por Nombre efecutado con exito::..\n\n");
-                    /*if(ll_sort(pArrayListEmployee,employee_compareByName,1)==0)
-                    {
-                        printf("\n..::Ordenamiento por Nombre efecutado con exito::..\n\n");
-                    }
-                    else
-                    {
-                        printf("\nNo se pudo ordenar.\n");
-                    }*/
-                    break;
-            }
-            break;//fin case 2
-
-        case 3:
-            switch(menuHowDoYouWantToOrder())
-            {
-                case 1://ascendente
-                    ll_sort(pArrayListEmployee,employee_compareByHT,0);
-                    printf("\n..::Ordenamiento por Horas trabajadas efecutado con exito::..\n\n");
-                    /*if(ll_sort(pArrayListEmployee,employee_compareByHT,0)==0)
-                    {
-                        printf("\n..::Ordenamiento por Horas trabajadas efecutado con exito::..\n\n");
-                    }
-                    else
-                    {
-                        printf("\nNo se pudo ordenar.\n");
-                    }*/
-                    break;
-
-                case 2://descendente
-                    ll_sort(pArrayListEmployee,employee_compareByHT,1);
-                    printf("\n..::Ordenamiento por Horas trabajadas efecutado con exito::..\n\n");
-                    /*if(ll_sort(pArrayListEmployee,employee_compareByHT,1)==0)
-                    {
-                        printf("\n..::Ordenamiento por Horas trabajadas efecutado con exito::..\n\n");
-                    }
-                    else
-                    {
-                        printf("\nNo se pudo ordenar.\n");
-                    }*/
-                    break;
-            }
-            break;//fin case 3
-
-        case 4:
-            switch(menuHowDoYouWantToOrder())
-            {
-                case 1://ascendente
-                    ll_sort(pArrayListEmployee,employee_compareBySalary,0);
-                    printf("\n..::Ordenamiento por Salario efecutado con exito::..\n\n");
-                    /*if(ll_sort(pArrayListEmployee,employee_compareBySalary,0)==0)
-                    {
-                        printf("\n..::Ordenamiento por Salario efecutado con exito::..\n\n");
-                    }
-                    else
-                    {
-                        printf("\nNo se pudo ordenar.\n");
-                    }*/
-                    break;
-
-                case 2://descendente
-                    ll_sort(pArrayListEmployee,employee_compareBySalary,1);
-                    printf("\n..::Ordenamiento por Salario efecutado con exito::..\n\n");
-                    /*if(ll_sort(pArrayListEmployee,employee_compareBySalary,1)==0)
-                    {
-                        printf("\n..::Ordenamiento por Salario efecutado con exito::..\n\n");
-                    }
-                    else
-                    {
-                        printf("\nNo se pudo ordenar.\n");
-                    }*/
-                    break;
-            }
-            break;//fin case 4
-
-        case 5:
-            operationCancelled();
+    case 1:
+        switch(menuHowDoYouWantToOrder())
+        {
+        case 1://ascendente
+            ll_sort(pArrayListEmployee,employee_compareById,0);
             retorno = 0;
+            printf("\n..::Ordenamiento por Id efecutado con exito::..\n\n");
+            break;
+
+        case 2://descendente
+            ll_sort(pArrayListEmployee,employee_compareById,1);
+            retorno = 0;
+            printf("\n..::Ordenamiento por Id efecutado con exito::..\n\n");
             break;
 
         default:
             errorOptionInvalid();
+            printf("  ===================================================\n");
+            printf("||  Error: usted ingreso una opcion invalida,        ||\n");
+            printf("||         sera redireccionado al menu.              ||\n");
+            printf("  ===================================================\n");
+        }
+        break;//fin case 1
+
+    case 2:
+        switch(menuHowDoYouWantToOrder())
+        {
+            case 1://ascendente
+                ll_sort(pArrayListEmployee,employee_compareByName,0);
+                retorno = 0;
+                printf("\n..::Ordenamiento por Nombre efecutado con exito::..\n\n");
+                break;
+
+            case 2://descendente
+                ll_sort(pArrayListEmployee,employee_compareByName,1);
+                retorno = 0;
+                printf("\n..::Ordenamiento por Nombre efecutado con exito::..\n\n");
+                break;
+        }
+            break;//fin case 2
+
+    case 3:
+        switch(menuHowDoYouWantToOrder())
+        {
+            case 1://ascendente
+                ll_sort(pArrayListEmployee,employee_compareByHT,0);
+                retorno = 0;
+                printf("\n..::Ordenamiento por Horas trabajadas efecutado con exito::..\n\n");
+                break;
+
+            case 2://descendente
+                ll_sort(pArrayListEmployee,employee_compareByHT,1);
+                retorno = 0;
+                printf("\n..::Ordenamiento por Horas trabajadas efecutado con exito::..\n\n");
+                break;
+        }
+        break;//fin case 3
+
+    case 4:
+        switch(menuHowDoYouWantToOrder())
+        {
+            case 1://ascendente
+                ll_sort(pArrayListEmployee,employee_compareBySalary,0);
+                retorno = 0;
+                printf("\n..::Ordenamiento por Salario efecutado con exito::..\n\n");
+                break;
+
+            case 2://descendente
+                ll_sort(pArrayListEmployee,employee_compareBySalary,1);
+                retorno = 0;
+                printf("\n..::Ordenamiento por Salario efecutado con exito::..\n\n");
+                break;
+        }
+        break;//fin case 4
+
+    case 5:
+        operationCancelled();
+        retorno = 0;
+        break;
+
+    default:
+        errorOptionInvalid();
     }
 
     return retorno;
@@ -487,9 +421,9 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param path char* Direecion de la ubicacion del archivo.
+ * \param pArrayListEmployee LinkedList* Puntero a la estructura LinkedList.
+ * \return int Retorna [0] si se cargo correctamente - [-1] Si hubo un error.
  *
  */
 int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
@@ -503,13 +437,13 @@ int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
     if(pArrayListEmployee!=NULL && len>0 && path!=NULL)
     {
         auxText = fopen(path,"w");
+
         if(auxText==NULL)
         {
             printf("\nNo se pudo abrir el archivo.\n");
             system("pause");
             return retorno;
         }
-
 
         /**** --PARA IMPRIMIR EL ENCABEZADO DESTILDO ESTO.-- ****/
         //fprintf(auxText,"id,nombre,horasTrabajadas,sueldo\n");
@@ -525,22 +459,18 @@ int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
                 retorno = 0;
             }
 
-            /*fwrite(pArrayListEmployee,sizeof(LinkedList),len,auxText);
-            fprintf(auxText,"%d,%s,%d,%d\n",ll_get(pArrayListEmployee,i));*(pArrayListEmployee+i))->id,(*(lista+i))->marca,(*(lista+i))->modelo,(*(lista+i))->precio);
-            retorno = 0;*/
         }
         fclose(auxText);
     }
 
     return retorno;
-    //return 1;
 }
 
-/** \brief Guarda los datos de los empleados en el archivo data.csv (modo binario).
+/** \brief Guarda los datos de los empleados en el archivo data.bin (modo binario).
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param path char* Direecion de la ubicacion del archivo.
+ * \param pArrayListEmployee LinkedList* Puntero a la estructura LinkedList.
+ * \return int Retorna [0] si se cargo correctamente - [-1] Si hubo un error.
  *
  */
 int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
@@ -565,5 +495,4 @@ int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
         retorno = 0;
     }
     return retorno;
-    //return 1;
 }

@@ -1,6 +1,36 @@
 
 #include "Employee.h"
 
+int menuGeneral()
+{
+    int option;
+    system("cls");
+    printf("  ======================================================================================\n");
+    printf("||                                 ABM EMPLEADOS                                        ||\n");
+    printf("  ======================================================================================\n");
+    printf("||  (1)  Cargar los datos de los empleados desde el archivo data.csv (modo texto).      ||\n");
+    printf("||  (2)  Cargar los datos de los empleados desde el archivo data.bin (modo binario).    ||\n");
+    printf("||  (3)  Alta de empleado.                                                              ||\n");
+    printf("||  (4)  Modificar datos de empleado                                                    ||\n");
+    printf("||  (5)  Baja de empleado.                                                              ||\n");
+    printf("||  (6)  Listar empleados.                                                              ||\n");
+    printf("||  (7)  Ordenar empleados.                                                             ||\n");
+    printf("||  (8)  Guardar los datos de los empleados en el archivo data.csv (modo texto).        ||\n");
+    printf("||  (9)  Guardar los datos de los empleados en el archivo data.bin (modo binario).      ||\n");
+    printf("||  (10) Salir.                                                                         ||\n");
+    printf("  ======================================================================================\n");
+    getInt(&option,"Elija opcion: ","Error. Reingrese\n",1,10,2);
+    return option;
+}
+
+
+
+
+/** \brief Constructor que setea los campos en vacios (en caso de strings) y en 0 en caso de numeros.
+ *
+ * \return Employee* Nuevo empleado ya inicializado.
+ *
+ */
 Employee* employee_new()
 {
     Employee* nuevoEmp = (Employee*)malloc(sizeof(Employee));
@@ -14,6 +44,16 @@ Employee* employee_new()
     return nuevoEmp;
 }
 
+
+/** \brief Constructor con parametros.
+ *
+ * \param idStr char* Variable pasada por parametro, donde se va a setear el ID.
+ * \param nombreStr char* Variable pasada por parametro, donde se va a setear el Nombre.
+ * \param horasTrabajadasStr char* Variable pasada por parametro, donde se va a setear el HorasTrabajadas.
+ * \param sueldoStr char* Variable pasada por parametro, donde se va a setear el Sueldo.
+ * \return Employee* Retorna un empleado seteado.
+ *
+ */
 Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr,char* sueldoStr)
 {
     Employee* nuevoEmpParam = employee_new();
@@ -25,25 +65,29 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
                 &&employee_setHorasTrabajadas(nuevoEmpParam,atoi(horasTrabajadasStr))
                 &&employee_setSueldo(nuevoEmpParam,atoi(sueldoStr)) == 0)
         {
-            /*free(nuevoEmpParam);
-            nuevoEmpParam = NULL;*/
             employee_delete(nuevoEmpParam);
         }
-
     }
     return nuevoEmpParam;
 }
 
+
+/** \brief Elimina al empleado de memoria.
+ *
+ * \param this Employee* Puntero a la estructura Employee.
+ * \return void No retorna nada.
+ *
+ */
 void employee_delete(Employee* this)
 {
-    //HACERRRRRRRRRR
     if(this!=NULL)
     {
         free(this);
     }
 }
 
-int employee_setId(Employee* this,int id)
+
+/*int employee_setId(Employee* this,int id)
 {
     int todoOk = 0;
     if(this!=NULL && id>=1 && id<=1500)
@@ -52,32 +96,51 @@ int employee_setId(Employee* this,int id)
         todoOk = 1;
     }
     return todoOk;
-}
+}*/
 
-/*int employee_setId(Employee* this, int id)
+/** \brief Al recibir un id maximo o igual a 0 verifica si se trata de un nuevo maximo
+ *         de ser asi lo conserva y en el caso de recibir un id negativo, calcula el id
+ *         a asignar automaticamente.
+ *
+ * \param this Employee* Puntero a la estructura Employee.
+ * \param id int Id que se va a setear.
+ * \return int Retorna [1] si se seteo correctamente - [0] si hubo un error.
+ *
+ */
+int employee_setId(Employee* this, int id)//Busca el id Maximo.
 {
-    //ULTIMO CAMBIO CAMBIE RETORNO 0 POR 1.
-    int retorno = -1;
-    static int maximoId = -1;
+    int todoOk = 0;
+    static int IdMaximo = -1;
+
     if(this != NULL)
     {
-        retorno = 1;
         if(id < 0)
         {
-            maximoId++;
-            this->id = maximoId;
+            IdMaximo++;
+            this->id = IdMaximo;
         }
         else
         {
-            if(id > maximoId)
-                maximoId = id;
-            this->id = id;
+            if(id>IdMaximo)
+            {
+                this->id = id;
+                IdMaximo = id;
+            }
         }
+        todoOk = 1;
     }
-    return retorno;
-}*/
+    return todoOk;
+}
 
 
+
+/** \brief Obtiene el id pasado por parametro.
+ *
+ * \param this Employee* Puntero a la estructura Employee.
+ * \param id int* Id que se va a obtener.
+ * \return int Retorna [-1].
+ *
+ */
 int employee_getId(Employee* this,int* id)
 {
     int retorno = -1;
@@ -88,6 +151,14 @@ int employee_getId(Employee* this,int* id)
     return retorno;
 }
 
+
+/** \brief Setea el nombre pasado por parametro.
+ *
+ * \param this Employee* Puntero a la estructura Employee.
+ * \param nombre char* Nombre que se va a setear.
+ * \return int Retorna [1] si se seteo correctamente - [0] si hubo un error.
+ *
+ */
 int employee_setNombre(Employee* this,char* nombre)
 {
     int todoOk = 0;
@@ -99,6 +170,14 @@ int employee_setNombre(Employee* this,char* nombre)
     return todoOk;
 }
 
+
+/** \brief Obtiene el nombre pasado por parametro.
+ *
+ * \param this Employee* Puntero a la estructura Employee.
+ * \param nombre char* Nombre que se va a obtener.
+ * \return int Retorna [1] si se obtuvo correctamente - [0] si hubo un error.
+ *
+ */
 int employee_getNombre(Employee* this,char* nombre)
 {
     int todoOk = 0;
@@ -110,6 +189,14 @@ int employee_getNombre(Employee* this,char* nombre)
     return todoOk;
 }
 
+
+/** \brief Setea las horas trabajadas pasado por parametro.
+ *
+ * \param this Employee* Puntero a la estructura Employee.
+ * \param horasTrabajadas int Horas trabajas que se va a setear.
+ * \return int Retorna [1] si se seteo correctamente - [0] si hubo un error.
+ *
+ */
 int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
 {
     int todoOk = 0;
@@ -121,6 +208,14 @@ int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
     return todoOk;
 }
 
+
+/** \brief Obtiene las horas trabajadas pasado por parametro.
+ *
+ * \param this Employee* Puntero a la estructura Employee.
+ * \param horasTrabajadas int* Horas trabajadas que se van a obtener.
+ * \return int Retorna [-1].
+ *
+ */
 int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
 {
     int retorno = -1;
@@ -131,6 +226,14 @@ int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
     return retorno;
 }
 
+
+/** \brief Setea el sueldo pasado por parametro.
+ *
+ * \param this Employee* Puntero a la estructura Employee.
+ * \param sueldo int Sueldo que se va a setear.
+ * \return int Retorna [1] si se seteo correctamente - [0] si hubo un error.
+ *
+ */
 int employee_setSueldo(Employee* this,int sueldo)
 {
     int todoOk = 0;
@@ -142,6 +245,14 @@ int employee_setSueldo(Employee* this,int sueldo)
     return todoOk;
 }
 
+
+/** \brief Obtiene el sueldo pasado por parametro.
+ *
+ * \param this Employee* Puntero a la estructura Employee.
+ * \param sueldo int* Sueldo que se van a obtener.
+ * \return int Retorna [-1].
+ *
+ */
 int employee_getSueldo(Employee* this,int* sueldo)
 {
     int retorno = -1;
@@ -152,6 +263,13 @@ int employee_getSueldo(Employee* this,int* sueldo)
     return retorno;
 }
 
+
+/** \brief Imprime por pantalla un empleado pasado por parametro.
+ *
+ * \param auxEmployee Employee* Puntero a la estructura Employee.
+ * \return int Retorna [1] si esta todoOK - [0] si hubo un error.
+ *
+ */
 int employee_ShowOneEmployee(Employee* auxEmployee)
 {
     int todoOk = 0;
@@ -163,6 +281,13 @@ int employee_ShowOneEmployee(Employee* auxEmployee)
     return todoOk;
 }
 
+
+/** \brief Imprime por pantalla todos los empleados de la LinkedList.
+ *
+ * \param pArrayListEmployee LinkedList* Puntero a la estructura LinkedList.
+ * \return int Retorna [1] si esta todoOK - [0] si hubo un error.
+ *
+ */
 int employee_ListEmployees(LinkedList* pArrayListEmployee)
 {
     int todoOk = 0;
@@ -177,10 +302,9 @@ int employee_ListEmployees(LinkedList* pArrayListEmployee)
 
         for(int i=0;i<len;i++)
         {
-            employee_ShowOneEmployee((Employee*)ll_get(pArrayListEmployee,i));
+            employee_ShowOneEmployee((Employee*)ll_get(pArrayListEmployee,i));//ll_get al devolver un void* lo casteo a Employee*.
             todoOk = 1;
         }
-
     }
     if(todoOk == 0)
     {
@@ -193,15 +317,11 @@ int employee_ListEmployees(LinkedList* pArrayListEmployee)
 }
 
 
-int generateId(void* this)
-{
-    int value = -1;
-
-    value = ll_len(this) + 1;
-
-    return value;
-}
-
+/** \brief Menu de modificacion.
+ *
+ * \return int Opcion ingresada.
+ *
+ */
 int menuModificacion()
 {
     int option;
@@ -217,6 +337,12 @@ int menuModificacion()
     return option;
 }
 
+
+/** \brief Menu de ordenamiento.
+ *
+ * \return int Opcion ingresada.
+ *
+ */
 int menuOrder()
 {
     int option;
@@ -234,6 +360,11 @@ int menuOrder()
 }
 
 
+/** \brief Menu de como desea ordenar.
+ *
+ * \return int Opcion ingresada.
+ *
+ */
 int menuHowDoYouWantToOrder()
 {
     int option;
@@ -252,11 +383,18 @@ int menuHowDoYouWantToOrder()
 }
 
 
-
-
-//ESTO RECIBE LA FUNCION LL_SORT.
+//ESTO RECIBE LA FUNCION LL_SORT (ayuda memoria).
 //ll_sort(LinkedList* this,int(*pFunc)(void*)(void*),int order);
 
+/** \brief Ordenamiento por ID.
+ *
+ * \param employee1 void* Puntero a void.
+ * \param employee2 void* Puntero a void.
+ * \return int Retorna [-1] si el primero es mayor al segundo.
+ * \return int Retorna [1] si el segundo es mayor al primero.
+ * \return int Retorna [0] si son iguales.
+ *
+ */
 int employee_compareById(void* employee1,void* employee2)
 {
     int retorno;
@@ -282,6 +420,15 @@ int employee_compareById(void* employee1,void* employee2)
     return retorno;
 }
 
+/** \brief Ordenamiento por nombre.
+ *
+ * \param employee1 void* Puntero a void.
+ * \param employee2 void* Puntero a void.
+ * \return int Retorna [-1] si el primero es mayor al segundo.
+ * \return int Retorna [1] si el segundo es mayor al primero.
+ * \return int Retorna [0] si son iguales.
+ *
+ */
 int employee_compareByName(void* employee1,void* employee2)
 {
     int retorno;
@@ -289,11 +436,11 @@ int employee_compareByName(void* employee1,void* employee2)
     Employee* emp1 = (Employee*) employee1;
     Employee* emp2 = (Employee*) employee2;
 
-    if(strcmpi(emp1->nombre,emp2->nombre)>0)
+    if(strcmp(emp1->nombre,emp2->nombre)>0)//Si uso strcmpi aparece un warning por implicit declaration...
     {
         retorno = -1;
     }
-    else if(strcmpi(emp1->nombre,emp2->nombre)<0)
+    else if(strcmp(emp1->nombre,emp2->nombre)<0)
     {
         retorno = 1;
     }
@@ -304,6 +451,15 @@ int employee_compareByName(void* employee1,void* employee2)
     return retorno;
 }
 
+/** \brief Ordenamiento por horas trabajadas.
+ *
+ * \param employee1 void* Puntero a void.
+ * \param employee2 void* Puntero a void.
+ * \return int Retorna [-1] si el primero es mayor al segundo.
+ * \return int Retorna [1] si el segundo es mayor al primero.
+ * \return int Retorna [0] si son iguales.
+ *
+ */
 int employee_compareByHT(void* employee1,void* employee2)
 {
     int retorno;
@@ -326,6 +482,15 @@ int employee_compareByHT(void* employee1,void* employee2)
     return retorno;
 }
 
+/** \brief Ordenamiento por sueldo.
+ *
+ * \param employee1 void* Puntero a void.
+ * \param employee2 void* Puntero a void.
+ * \return int Retorna [-1] si el primero es mayor al segundo.
+ * \return int Retorna [1] si el segundo es mayor al primero.
+ * \return int Retorna [0] si son iguales.
+ *
+ */
 int employee_compareBySalary(void* employee1,void* employee2)
 {
     int retorno;
@@ -348,28 +513,39 @@ int employee_compareBySalary(void* employee1,void* employee2)
     return retorno;
 }
 
-/*int employee_comparteByIdAndName(void* employee1,void* employee2)
+/*
+--Revisar
+int employee_deleteLinkedList(LinkedList* this)
 {
-    int retorno;
+    int retorno = -1;
+    int len = ll_len(this);
 
-    Employee* emp1 = (Employee*) employee1;
-    Employee* emp2 = (Employee*) employee2;
-
-    if(emp1->id > emp2->id)
+    for(int i=0;i<len;i++)
     {
-
+        if(ll_pop(this,i)!=NULL)
+        {
+            employee_delete((Employee*)ll_pop(this,i));
+            retorno = 0;
+            //printf("lueluelue\n");
+        }
     }
+    if(retorno == 0)
+    {
+        ll_deleteLinkedList(this);
+        printf("lueluelue\n");
+    }
+
+
     return retorno;
 }*/
 
 
-
-
-
-
-
-
 //MESSAGES
+/** \brief Cartel de error avisando que no se pudo abrir el archivo.
+ *
+ * \return void No retorna nada.
+ *
+ */
 void errorPosterFile()
 {
     printf("  ===================================================\n");
@@ -377,6 +553,11 @@ void errorPosterFile()
     printf("  ===================================================\n");
 }
 
+/** \brief Cartel de error avisando que no existe empleado con ese ID.
+ *
+ * \return void No retorna nada.
+ *
+ */
 void errorPosterId()
 {
     printf("  ===================================================\n");
@@ -385,6 +566,11 @@ void errorPosterId()
     printf("  ===================================================\n");
 }
 
+/** \brief Cartel de error avisando que no puede abrirse mas de un archivo a la vez.
+ *
+ * \return void No retorna nada.
+ *
+ */
 void warningPosterFile()
 {
     printf("  ===================================================\n");
@@ -393,6 +579,11 @@ void warningPosterFile()
     printf("  ===================================================\n");
 }
 
+/** \brief Cartel de error avisando que debe cargarse un archivo antes.
+ *
+ * \return void No retorna nada.
+ *
+ */
 void errorUploadFileBefore()
 {
     printf("  ===================================================\n");
@@ -400,6 +591,11 @@ void errorUploadFileBefore()
     printf("  ===================================================\n");
 }
 
+/** \brief Cartel de error avisando que ingreso una opcion invalida.
+ *
+ * \return void No retorna nada.
+ *
+ */
 void errorOptionInvalid()
 {
     printf("  ===================================================\n");
@@ -408,6 +604,11 @@ void errorOptionInvalid()
     printf("  ===================================================\n");
 }
 
+/** \brief Cartel de error avisando que la operacion fue cancelada.
+ *
+ * \return void No retorna nada.
+ *
+ */
 void operationCancelled()
 {
     printf("  ===================================================\n");
