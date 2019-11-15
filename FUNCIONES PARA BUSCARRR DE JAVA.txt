@@ -1,0 +1,5 @@
+buscar en java estas funciones
+
+map
+reduce
+filter
